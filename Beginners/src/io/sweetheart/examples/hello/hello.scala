@@ -1,0 +1,7 @@
+package io.sweetheart.examples.hello
+
+object HelloWorld {
+  def main(args: Array[String]): Unit = {
+    println("hello scala")
+  }
+}
