@@ -12,7 +12,7 @@ object DefOverVal {
   }
 
   abstract class BadApple extends Fruit {
-    def v: String
-    def m: String
+    val v: String
+    val m: String
   }
 }

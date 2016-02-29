@@ -1,0 +1,13 @@
+val hex = 0x5
+val hex2 = 0x00FF
+val magic = 0xcafebabe
+//val oct = 035
+//val nov = 0777
+val prog = 0XCAFEBABEL
+val tower = 35L
+val of = 31l
+val little: Short = 367
+val big = 1.2345
+val bigger = 1.2345e1
+val biggerStill = 123E45
+val little1 = 1.2345F

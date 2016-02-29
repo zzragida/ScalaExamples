@@ -6,8 +6,8 @@ object AbstractCurrencyObj {
     val amount: Long
     def designation: String
     override def toString = amount + " " + designation
-    def + (that: Currency): Currency = new Currency {
-      val amount = this.amount + that.amount
-    }
+//    def + (that: Currency): Currency = new Currency {
+//      val amount = this.amount + that.amount
+//    }
   }
 }
