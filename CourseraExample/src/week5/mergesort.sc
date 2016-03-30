@@ -42,6 +42,12 @@ object mergesort {
 //  }
 
   /* ------------------------------------------------------------- */
+  // test1
+  //  val list = List(2, -4, 5, 7, 1)
+  //  msort(list)
+
+
+  /* ------------------------------------------------------------- */
   // step3-1 Int => T
 //  def msort[T](xs: List[T]): List[T] = {
 //    val n = xs.length / 2
@@ -102,29 +108,25 @@ object mergesort {
 
   /* ------------------------------------------------------------- */
   // step3-3 ordering (scala.match.Ordering[T])
-  import scala.math.Ordering
+//  import scala.math.Ordering
+//
+//  def msort[T](xs: List[T])(implicit ord: Ordering[T]): List[T] = {
+//    val n = xs.length / 2
+//    if (n == 0) xs
+//    else {
+//      def merge(xs: List[T], ys: List[T]): List[T] = (xs, ys) match {
+//        case (`Nil`, `ys`) => ys
+//        case (`xs`, `Nil`) => xs
+//        case (x :: xs1, y :: ys1) =>
+//          if (ord.lt(x, y)) x :: merge(xs1, ys)
+//          else y :: merge(xs, ys1)
+//      }
+//
+//      val (fst, snd) = xs splitAt n
+//      merge(msort(fst), msort(snd))
+//    }
+//  }
 
-  def msort[T](xs: List[T])(implicit ord: Ordering[T]): List[T] = {
-    val n = xs.length / 2
-    if (n == 0) xs
-    else {
-      def merge(xs: List[T], ys: List[T]): List[T] = (xs, ys) match {
-        case (`Nil`, `ys`) => ys
-        case (`xs`, `Nil`) => xs
-        case (x :: xs1, y :: ys1) =>
-          if (ord.lt(x, y)) x :: merge(xs1, ys)
-          else y :: merge(xs, ys1)
-      }
-
-      val (fst, snd) = xs splitAt n
-      merge(msort(fst), msort(snd))
-    }
-  }
-
-  /* ------------------------------------------------------------- */
-  // test1
-//  val list = List(2, -4, 5, 7, 1)
-//  msort(list)
 
   /* ------------------------------------------------------------- */
   // test2
@@ -144,10 +146,42 @@ object mergesort {
 
   /* ------------------------------------------------------------- */
   // test4
-  val list = List(2, -4, 5, 7, 1)
-  var fruits = List("apple", "pineapple", "orange", "banana")
+//  val list = List(2, -4, 5, 7, 1)
+//  var fruits = List("apple", "pineapple", "orange", "banana")
+//
+//  msort(list)
+//  msort(fruits)
 
-  msort(list)
-  msort(fruits)
+
+
+
+  /* ------------------------------------------------------------- */
+  // step3-4 ordering with custom object (scala.match.Ordering[T])
+  import scala.math.Ordering
+
+  case class Person(_age: Int, _name: String) {
+    val age = _age
+    val name = _name
+  }
+
+  def msort[T](xs: List[T])(implicit ord: Ordering[T]): List[T] = {
+    val n = xs.length / 2
+    if (n == 0) xs
+    else {
+      def merge(xs: List[T], ys: List[T]): List[T] = (xs, ys) match {
+        case (`Nil`, `ys`) => ys
+        case (`xs`, `Nil`) => xs
+        case (x :: xs1, y :: ys1) =>
+          if (ord.lt(x, y)) x :: merge(xs1, ys)
+          else y :: merge(xs, ys1)
+      }
+
+      val (fst, snd) = xs splitAt n
+      merge(msort(fst), msort(snd))
+    }
+  }
+  var persons = List(new Person(30, "alex"), new Person(20, "bob"), new Person(40, "sam"))
+
+  msort(persons)(Ordering.by(p => p.age))
 }
 
