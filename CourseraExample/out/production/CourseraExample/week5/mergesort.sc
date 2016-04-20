@@ -154,7 +154,7 @@ object mergesort {
 
 
 
-  
+
   /* ------------------------------------------------------------- */
   // step3-4 ordering with custom object (scala.match.Ordering[T])
   import scala.math.Ordering
